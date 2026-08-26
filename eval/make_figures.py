@@ -160,6 +160,48 @@ def figure2_mosaicism():
     save(fig, "fig2_mosaicism_scan")
 
 
+def figure3_ddg():
+    """Where N1002K sits in the domain-wide ddG distribution."""
+    import pandas as pd
+    df = pd.read_csv(REPO / "eval" / "ddg_ssm_kinase_domain.csv")
+    df["residue"] = df.position + 766
+    df = df[df.wildtype != df.mutation]          # drop identity substitutions
+    variant = float(df[(df.residue == 1002) & (df.mutation == "K")].ddG_pred.iloc[0])
+    site = df[df.residue == 1002].ddG_pred
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 3.9),
+                                   gridspec_kw={"width_ratios": [2.1, 1], "wspace": 0.28})
+
+    ax1.hist(df.ddG_pred, bins=60, color="#c9d6df", edgecolor="white", linewidth=0.4)
+    ax1.axvline(variant, color=MISSENSE, linewidth=2)
+    ax1.axvline(df.ddG_pred.mean(), color=MUTED, linewidth=1, linestyle="--")
+    ymax = ax1.get_ylim()[1]
+    ax1.text(variant + 0.08, ymax * 0.92, f"p.Asn1002Lys\n{variant:+.2f} kcal/mol\n75th percentile",
+             fontsize=8.5, color=MISSENSE, va="top")
+    ax1.text(df.ddG_pred.mean() - 0.1, ymax * 0.5, "domain mean\n+0.87", fontsize=7.5,
+             color=MUTED, ha="right", va="center")
+    ax1.set_xlabel("predicted ΔΔG (kcal/mol); positive = destabilising", fontsize=9)
+    ax1.set_ylabel("substitutions", fontsize=9)
+    ax1.set_title(f"All {len(df):,} substitutions in the pseudokinase domain",
+                  fontsize=10, color=INK, loc="left")
+
+    order = site.sort_values()
+    colours = [MISSENSE if abs(v - variant) < 1e-9 else "#c9d6df" for v in order]
+    ax2.barh(range(len(order)), order.values, color=colours, height=0.72)
+    labels = df[df.residue == 1002].set_index("ddG_pred").mutation.to_dict()
+    ax2.set_yticks(range(len(order)))
+    ax2.set_yticklabels([labels[v] for v in order.values], fontsize=7)
+    ax2.set_xlabel("ΔΔG (kcal/mol)", fontsize=9)
+    ax2.set_title("Every substitution at residue 1002", fontsize=10, color=INK, loc="left")
+    ax2.text(variant + 0.05, list(order.values).index(variant), " observed",
+             fontsize=7.5, color=MISSENSE, va="center")
+
+    for ax in (ax1, ax2):
+        ax.spines[["top", "right"]].set_visible(False)
+    save(fig, "fig3_ddg_distribution")
+
+
 if __name__ == "__main__":
     figure1_domains()
     figure2_mosaicism()
+    figure3_ddg()

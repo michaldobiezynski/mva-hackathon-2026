@@ -75,13 +75,19 @@ Three honest limits on that inference. It is a burial proxy, not a ΔΔG calcula
 | Quantity | Value |
 | --- | --- |
 | **p.Asn1002Lys ΔΔG** | **+1.51 kcal/mol, destabilising** |
-| Rank among all 5,700 domain substitutions | 76th percentile |
-| Mean ΔΔG at residue 1002 across all substitutions | +1.55, the 81st percentile of the domain's 285 sites |
-| Domain-wide mean | +0.83 |
+| Rank among the domain's 5,415 substitutions | 75th percentile |
+| Mean ΔΔG at residue 1002 | +1.63, the 81st percentile of the domain's 285 sites |
+| Domain-wide mean | +0.87 |
 
-The sign convention is established from the data rather than assumed: identity substitutions score exactly +0.000, and X→Pro substitutions average +1.82 against an overall mean of +0.83, so positive values are destabilising.
+All figures exclude the 285 identity substitutions, which are not substitutions; including them shifts the variant's percentile by about one point.
+
+The sign convention is established from the data rather than assumed: identity substitutions score exactly +0.0000, and X→Pro substitutions average +1.86 against an overall mean of +0.87, so positive values are destabilising.
 
 Two features matter more than the number itself. First, **residue 1002 is a substitution-sensitive position** (81st percentile of sites), consistent with its conservation, its burial, and the sequence predictors calling the variant pathogenic. Second, and therapeutically, **the magnitude is moderate rather than catastrophic**: +1.5 kcal/mol describes a protein that still folds and is still made, at a reduced steady-state level, rather than one that is absent or grossly misfolded. That is precisely the regime in which raising abundance is worth attempting, since a severely destabilised product would leave nothing to stabilise.
+
+![Predicted ΔΔG distribution with the variant marked](../figures/fig3_ddg_distribution.png)
+
+*Figure 3. Left: the predicted ΔΔG of all 5,415 substitutions in the pseudokinase domain, with p.Asn1002Lys marked. Right: every substitution at residue 1002, showing that the site is broadly intolerant and that lysine sits mid-range within it rather than at either extreme. Positive values are destabilising, a convention derived from the scan itself (see text). Data: `eval/ddg_ssm_kinase_domain.csv`.*
 
 Honest qualifications: p.Asn1002Lys is mid-range among possible substitutions at this site rather than the worst of them; ThermoMPNN was trained largely on small monomeric domains, so applying it to a domain excised from a large multi-domain protein is reasonable but not fully validated; and the input is a predicted structure. Full caveats in `REPRODUCE-DDG.md`.
 

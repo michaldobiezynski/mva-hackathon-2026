@@ -36,10 +36,14 @@ def main() -> int:
     # substitutions must score zero, and prolines should sit on the
     # destabilising side of the overall mean.
     identity = df[df.wildtype == df.mutation].ddG_pred
+    # Identity rows are the internal control for the sign convention, but they are
+    # not substitutions, so every statistic below is computed without them.
+    df = df[df.wildtype != df.mutation]
     pro = df[df.mutation == "P"].ddG_pred
     destabilising_is_positive = pro.mean() > df.ddG_pred.mean()
-    print(f"scan: {len(df)} substitutions across {df.residue.nunique()} residues")
-    print(f"  identity substitutions mean {identity.mean():+.3f} (expected 0)")
+    print(f"scan: {len(df)} substitutions across {df.residue.nunique()} residues "
+          f"({len(identity)} identity rows excluded from statistics)")
+    print(f"  identity substitutions mean {identity.mean():+.4f} (expected 0)")
     print(f"  X->Pro mean {pro.mean():+.3f} vs overall mean {df.ddG_pred.mean():+.3f}")
     print(f"  => {'positive' if destabilising_is_positive else 'negative'} values are destabilising\n")
 

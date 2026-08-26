@@ -47,11 +47,13 @@ Output is a site-saturation scan: 285 positions × 20 residues = 5,700 predictio
 ## Result
 
 ```
-N1002K: ddG = +1.507 kcal/mol (76th percentile of all substitutions in this domain)
-site mean +1.549 (81st percentile of 285 sites): more substitution-sensitive than average
+N1002K: ddG = +1.507 kcal/mol (75th percentile of all substitutions in this domain)
+site mean +1.630 (81st percentile of 285 sites): more substitution-sensitive than average
 ```
 
-Sign convention is established internally rather than taken on trust: identity substitutions score exactly +0.000, and X→Pro averages +1.82 against an overall mean of +0.83, so **positive values are destabilising**.
+Statistics exclude the 285 identity substitutions (wildtype == mutation), which are not substitutions and would otherwise pad the low end of the distribution.
+
+Sign convention is established internally rather than taken on trust: identity substitutions score exactly +0.0000, and X→Pro averages +1.86 against an overall mean of +0.87, so **positive values are destabilising**.
 
 ## Caveats
 
