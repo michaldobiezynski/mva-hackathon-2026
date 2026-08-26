@@ -23,6 +23,10 @@ Draft CSV (7 rows incl. 2 secondary) scores 100/100 offline against the primary 
 
 **Leaderboard reality (26/08)**: 10+ participants already at 100/1.000, several with bub1b filenames. The automated metric is saturated; ranking among the 100s will come down to the post-close qualitative evaluation of methods/reports, secondary findings quality, and Track 2.
 
+## Track 2 status (26/08)
+
+Full report drafted (`track2/report/michaldobiezynski_track2_report.md`, commit 73170ea) against the rubric: mechanism characterisation with domain-map genotype specificity, NAD+/SIRT2 primary + senolytics secondary + a negative recommendation (avoid Mps1/Aurora inhibitors), honest mosaicism negative, falsification ladder, limitations. Two fresh-context adversarial reviews (rigour lens + judge-panel lens) commissioned 26/08. **Not submitted - single shot, submit near deadline after review triage.**
+
 ## Next actions (focus shift)
 
 1. **Track 2 is now the competition**: drug repurposing report built on the confirmed BUB1B/BubR1 spindle-assembly-checkpoint mechanism. Panel-judged (rigor 35/impact 25/innovation 25/scalability 15), single submission, due 24/10. Start the mechanism literature review.

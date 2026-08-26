@@ -37,6 +37,14 @@ EPCR values encode relative confidence in the compound-het pairings of the same 
 3. Genome-wide sweep: proband VCF intersected with the full ClinVar P/LP catalogue (346,282 entries): 7 hits genome-wide, all heterozygous; BUB1B is the only phenotype-concordant hit and the only gene with a plausible biallelic configuration among rare variants. No competing explanation found.
 4. Offline scoring: the published evaluator (`evaluation.py` from the challenge Space, vendored with attribution) was run against explicit hypothesis files; this CSV scores 100/100 rank points and F-max 1.0 if hypothesis 1 is the validated answer.
 
+## Additional analysis: direct mosaicism assessment (honest negative)
+
+Because the condition is defined by *mosaic* aneuploidy, I tested whether the supplied bulk WGS could quantify it directly, using per-chromosome median read depth and the dispersion of heterozygous allele balance across PASS biallelic SNVs (output: `mosaicism_scan.tsv`; code in the repository).
+
+Median depth is flat at 44x across chr1-18 (ratios 1.00) with chrX at 0.50, consistent with a male proband and with **no dominant clonal aneuploidy** in this blood-derived sample. Chromosomes 20-22 show modestly wider allele-balance dispersion (sd ~0.13 vs ~0.09 elsewhere) and 4.5-7% higher depth; however, the male chrX "heterozygous" calls, which are necessarily artefactual, carry the same signature, so short-chromosome GC/mapping bias is a more parsimonious explanation than genuine mosaicism.
+
+This is the expected outcome rather than a disappointment: bulk sequencing averages across cells, and variegated aneuploidy is by definition non-clonal, so it largely cancels. Quantifying this child's mosaic fraction, the natural biomarker for disease burden and for any future intervention, requires single-cell sequencing or conventional cytogenetics on cultured cells. I report this as an evidence gap, not as a finding.
+
 ## Limitations
 
 - **Phasing**: the trans configuration of the rank-1 pair is inferred, not proven (single sample, variants ~11 kb apart, no parental genotypes). The parental recurrent-miscarriage history is consistent with two carrier parents.
