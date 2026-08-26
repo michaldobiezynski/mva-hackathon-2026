@@ -4,10 +4,11 @@
 
 ## Next actions
 
-1. Request dataset access: log in to Hugging Face, complete the gated-access form at https://huggingface.co/datasets/SageBio/mva-hackathon-2026-data (user action; attestation to rules required).
-2. Once granted: download working set to `~/mva-data/` (start with VCFs + HPO terms; FASTQ only if re-calling proves necessary).
-3. Literature pass on Mosaic Variegated Aneuploidy genetics (known genes, inheritance patterns) before touching the data.
-4. First-pass Track 1 pipeline per `command-centre/STRATEGY.md`.
+1. Read `~/mva-data/Challenge_Clinical_Phenotype_1.docx` (the HPO phenotype description) and extract the term list.
+2. Literature pass on Mosaic Variegated Aneuploidy genetics (known genes, inheritance patterns) before touching the VCF.
+3. VCF sanity pass: reference build check (GRCh38 expected), variant count, sample fields, then first-pass Track 1 pipeline per `command-centre/STRATEGY.md`.
+
+Dataset access: **ACCEPTED** (confirmed 26/08 in HF settings/gated-repos; account already held access, no new form needed). **Full corpus downloaded** to `~/mva-data/` on 26/08 (~79 GiB: 8 WGS FASTQ lane pairs + `WGS_EX2312012_HGWCNDSX7.vcf.gz` + .tbi + phenotype docx + README; verified against the repo tree, download exit 0). The FASTQs are the deletion-obligation bulk; the analysis starts from the VCF.
 
 ## Submission budget
 
@@ -25,3 +26,4 @@ Track 1: **6/6 remaining**. Track 2: **1/1 remaining**. Ledger: `command-centre/
 | Date | What happened |
 | --- | --- |
 | 26/08 | Kit scaffolded from challenge source; local scorer verified against the official template CSV |
+| 26/08 | Dataset access confirmed ACCEPTED; VCF working set downloaded to ~/mva-data/ (logged in DATA-GOVERNANCE.md) |

@@ -10,7 +10,7 @@ This hackathon uses real genomic and clinical data from a living child, shared b
 
 | Environment holding data | Created | Deleted |
 | --- | --- | --- |
-| ~/mva-data/ (local) | | |
+| ~/mva-data/ (local) | 26/08/2026, full corpus (~79 GiB: 8 FASTQ + VCF + index + phenotype docx + README) | |
 
 ## Hard rules
 
