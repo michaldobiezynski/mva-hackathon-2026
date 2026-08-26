@@ -1,0 +1,7 @@
+{
+  "_comment": "Primary hypothesis 26/08: BUB1B compound het = known P/LP stop-gain p.Leu737* (chr15:40209701 T>G het, gnomAD 3.3e-5, ClinVar Pathogenic/Likely pathogenic, rs759242053, 46x GQ99) + novel missense p.Asn1002Lys (chr15:40220612 T>G het, absent gnomAD, 28x GQ99). Phase unknown (single sample, ~11kb apart). VCF uses non-chr GRCh38 naming; these are converted to submission format.",
+  "PROBAND01": [
+    ["chr15", 40209701, "T", "G"],
+    ["chr15", 40220612, "T", "G"]
+  ]
+}

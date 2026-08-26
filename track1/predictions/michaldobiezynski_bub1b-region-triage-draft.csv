@@ -1,0 +1,6 @@
+proband_id,chrom_1,pos_1,ref_1,alt_1,chrom_2,pos_2,ref_2,alt_2,epcr,finding_type,notes
+PROBAND01,chr15,40209701,T,G,chr15,40220612,T,G,0.60,primary,BUB1B compound het: ClinVar P/LP stop p.Leu737* + novel missense p.Asn1002Lys
+PROBAND01,chr15,40209701,T,G,chr15,40216470,A,G,0.20,primary,BUB1B compound het alt: stop p.Leu737* + novel intronic/regulatory A>G
+PROBAND01,chr15,40209701,T,G,chr15,40192892,C,T,0.08,primary,BUB1B compound het alt: stop p.Leu737* + rare intronic rs185599777
+PROBAND01,chr15,40209701,T,G,,,,,0.06,primary,BUB1B stop p.Leu737* alone (if second allele is structural/undetected)
+PROBAND01,chr5,893132,G,C,chr5,902436,A,G,0.03,secondary,TRIP13 rare het pair (AF 0.0013/0.0084) - weaker fit but MVA3 is cancer-predisposing

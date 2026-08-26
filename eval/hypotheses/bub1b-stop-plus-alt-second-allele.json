@@ -1,0 +1,7 @@
+{
+  "_comment": "Alternate hypothesis 26/08: same BUB1B stop-gain paired with the other novel het in the region (chr15:40216470 A>G, absent from MyVariant hg38, 46x GQ99, unclear consequence). Kept as fallback second allele.",
+  "PROBAND01": [
+    ["chr15", 40209701, "T", "G"],
+    ["chr15", 40216470, "A", "G"]
+  ]
+}
