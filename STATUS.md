@@ -8,12 +8,19 @@
 
 **Gotcha for submission**: the challenge VCF is GRCh38 with NON-chr contig names (`15`, not `chr15`); predictions must convert to chr-prefixed.
 
-## Next actions (verification before any submission - 6-slot budget untouched)
+## Verification complete (26/08 afternoon)
 
-1. Verify p.Leu737* directly on ClinVar and p.Asn1002Lys consequence via VEP (Ensembl REST was down 26/08; MyVariant.info used, must cross-check).
-2. Genome-wide unbiased sweep (rare + damaging + biallelic patterns beyond the 4 known genes) so the ranking isn't gene-prior circular.
-3. Phase caveat: trans configuration unproven (single sample, ~11 kb apart); note in report, consider FASTQ-level read-backed phasing as a long shot.
-4. Then: finalise EPCR ranking, ledger entry, first real submission (also validates mechanics).
+1. **ClinVar direct**: VCV 533901 = `NM_001211.6(BUB1B):c.2210T>G (p.Leu737Ter)`, Pathogenic/Likely pathogenic, criteria provided multiple submitters no conflicts, condition **Mosaic variegated aneuploidy syndrome 1**. Confirmed.
+2. **VEP independent check**: 40220612 T>G = missense N1002K on ENST00000287598, MODERATE. Confirmed. 40216470 A>G = plain intronic (MODIFIER) - demoted to speculative fallback.
+3. **Genome-wide ClinVar P/LP sweep** (full VCF x 346k-entry P/LP catalogue): only 7 hits, all het; BUB1B is the sole phenotype-relevant one; no competing biallelic pattern. Secondary findings added to draft: LZTR1 het P/LP (Noonan 2/10, schwannomatosis), PRSS1 het P/LP (hereditary pancreatitis). Sweep limits: exact-match on ClinVar-known SNV/indels; novel damaging variants outside the 4 MVA genes and structural variants not assessed.
+4. **Phasing**: trans configuration not provable from single-sample short reads (~11 kb apart), no parental data; stated as an assumption in the report. Parental recurrent miscarriages are consistent with two carrier parents.
+
+Draft CSV (7 rows incl. 2 secondary) scores 100/100 offline against the primary hypothesis.
+
+## Next actions
+
+1. Write the methods report (`track1/report/`), then ledger entry, then **first real submission** - it validates mechanics with hours of headroom, and the budget allows 5 more.
+2. Longer-horizon rigour (before final submission): local snpEff/VEP pass for novel damaging variants genome-wide; SpliceAI on the intronic fallbacks.
 
 Dataset access: **ACCEPTED** (confirmed 26/08 in HF settings/gated-repos; account already held access, no new form needed). **Full corpus downloaded** to `~/mva-data/` on 26/08 (~79 GiB: 8 WGS FASTQ lane pairs + `WGS_EX2312012_HGWCNDSX7.vcf.gz` + .tbi + phenotype docx + README; verified against the repo tree, download exit 0). The FASTQs are the deletion-obligation bulk; the analysis starts from the VCF.
 
