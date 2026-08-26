@@ -33,10 +33,24 @@ This genotype-dependence is the rigor+innovation core: BubR1-raising strategies 
 ### 3. Contra-indication insight (cheap rigour points)
 Drugs that further weaken the SAC (Mps1/TTK or Aurora B inhibitors, in trials for oncology) are mechanistically contraindicated in MVA outside tumour-directed contexts; worth one paragraph in the report as mechanism-literate safety reasoning.
 
+## Verification passes completed 26/08
+
+### Domain map (UniProt O60566, fetched directly)
+BubR1 = 1050 aa; protein kinase domain = **766-1050** (active site 882; ATP binding 772-780). Therefore:
+- p.Leu737Ter truncates BEFORE the kinase domain even if the transcript escapes NMD - the allele cannot contribute kinase function and loses the C-terminus entirely.
+- p.Asn1002Lys sits INSIDE the kinase domain. The retained full-length allele carries a kinase-domain substitution; BubR1's stoichiometric (kinase-independent) Cdc20-inhibition function via the N-terminal region may be intact on this allele - strengthening the "stabilise the missense allele's product" rationale. (KEN-box/Cdc20 region intactness: assert from the BubR1 literature when drafting, with citation.)
+
+### ONTRAC verified, with a counterweight
+ONTRAC (NEJM 2015, NEJMoa1506197): phase 3, n=386 high-risk (immunocompetent) patients, nicotinamide 500 mg twice daily, 23% reduction in new non-melanoma skin cancers (P=0.02), safe. BUT a 2023 NEJM trial in transplant recipients (NEJMoa2203086) did not replicate the benefit in that immunosuppressed population (moderate confidence on direction - re-verify before the final report cites it). Use both: citing the failed replication is rigor the panel will notice.
+
+### Prior-art sweep: clear
+No published proposal of NAD+ repletion or senolytics for MVA specifically (searched 26/08). Supporting adjacent art that makes the proposal credible rather than eccentric: aneuploidy/CIN -> senescence + SASP (Oncogenesis 2018); senolysis extends healthspan in progeroid CIN mice; PARP activation depletes NAD+ in CIN cells and nicotinamide rescues phenotypes; Nature Reviews Genetics 2024 review "Mosaic variegated aneuploidy in development, ageing and cancer" (s41576-024-00762-6) as the framing citation; one HSCT case report in MVA1 (PMC6500003) as existing-intervention prior art. Innovation claim is defensible: genotype-informed NAD+/SIRT2 stabilisation for MVA1 appears novel.
+
+### Mosaicism scan (bulk VCF, 26/08; ~/mva-data/derived/mosaicism_scan.tsv)
+Per-chromosome median depth is flat (ratio 1.000) across chr1-18 at 44x; chrX ratio 0.50 = male proband. **No dominant clonal aneuploidy in blood-derived bulk WGS** - consistent with the variegated (non-clonal) pattern, which bulk sequencing averages out. Chr20/21/22 show wider het allele-balance (sd 0.13 vs 0.09; tails ~22% vs ~9%) and +4.5-7% depth, but short-chromosome GC/mapping artefacts are the more parsimonious explanation (male chrX "hets", necessarily artefacts, show the same signature). Report framing: an honest negative + method note that single-cell or cytogenetic data is needed to quantify variegated mosaicism; do NOT claim aneuploidy detection.
+
 ## Next passes
 
-1. Verify BubR1 domain map (does L737* remove the kinase domain; is NMD expected from the exon position).
-2. Verify ONTRAC nicotinamide trial details before citing.
-3. Prior-art sweep: has anyone proposed NAD+ repletion or senolytics for MVA1 specifically? (Innovation criterion depends on this.)
-4. Mosaicism quantification from the FASTQs (per-chromosome depth) - on-theme evidence for the report and a personal severity baseline.
-5. Draft report to the rubric; adversarial review; sit on it; submit near deadline (single shot).
+1. Draft the Track 2 report to the rubric (structure already in `track2/report/`); weave in domain-map genotype specificity, both trials, prior-art framing, mosaicism negative.
+2. Adversarial fresh-context review of the draft; sit; submit near deadline (single shot).
+3. Before final submission: re-verify the 2023 transplant-trial direction; BubR1 KEN-box/Cdc20 region citation; polish Track 1 report with the mosaicism scan and resubmit (safe - best score counts).
