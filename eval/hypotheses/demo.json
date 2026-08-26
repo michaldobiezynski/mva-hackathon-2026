@@ -1,0 +1,7 @@
+{
+  "_comment": "DEMO ONLY - matches track1/predictions/template.csv row 1, proving the scorer end to end (expect 100 rank points, F-max 1.0). Replace with real candidate hypotheses as the pipeline produces them, one JSON per hypothesis, named for the gene/mechanism it encodes.",
+  "PROBAND01": [
+    ["chr1", 100000, "A", "T"],
+    ["chr1", 200000, "G", "C"]
+  ]
+}

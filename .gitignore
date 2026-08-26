@@ -1,0 +1,23 @@
+# Patient data must never enter this repo (see DATA-GOVERNANCE.md)
+*.vcf
+*.vcf.gz
+*.vcf.bgz
+*.gvcf*
+*.fastq*
+*.fq
+*.fq.gz
+*.bam
+*.bai
+*.cram
+*.crai
+data/*
+!data/README.md
+
+# Environments and caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.*
