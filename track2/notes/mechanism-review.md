@@ -49,6 +49,29 @@ No published proposal of NAD+ repletion or senolytics for MVA specifically (sear
 ### Mosaicism scan (bulk VCF, 26/08; ~/mva-data/derived/mosaicism_scan.tsv)
 Per-chromosome median depth is flat (ratio 1.000) across chr1-18 at 44x; chrX ratio 0.50 = male proband. **No dominant clonal aneuploidy in blood-derived bulk WGS** - consistent with the variegated (non-clonal) pattern, which bulk sequencing averages out. Chr20/21/22 show wider het allele-balance (sd 0.13 vs 0.09; tails ~22% vs ~9%) and +4.5-7% depth, but short-chromosome GC/mapping artefacts are the more parsimonious explanation (male chrX "hets", necessarily artefacts, show the same signature). Report framing: an honest negative + method note that single-cell or cytogenetic data is needed to quantify variegated mosaicism; do NOT claim aneuploidy detection.
 
+## Adversarial review round 1 (26/08): judge-panel lens scored the first draft 58/100
+
+Every finding below was **independently verified before actioning** (searches/APIs re-run by me, not taken on the reviewer's word). Actioned in commit ad9bb9b.
+
+| Finding | Verified? | Action |
+| --- | --- | --- |
+| Load-bearing "~50% residual expression" claim uncited | Yes - source is Suijkerbuijk 2008 Hum Genet (PMID 18932004), shRNA gradient 8.5/10/14/58/77%, aneuploidy below 50% | Cited; strengthened (it is an experimental threshold, not a rule of thumb) |
+| **BubR1 is a PSEUDOKINASE; my "kinase function impaired" premise was wrong** | Yes - catalytic activity dispensable for error-free segregation in human cells; pseudokinase domain + KARD recruit PP2A-B56 | Section 1.3 rewritten. Reframes N1002K as destabilising OR scaffolding-impairing; the former is druggable, the latter is not, and distinguishing them is now the gating experiment |
+| **Missing candidate: nonsense readthrough for allele A** | Yes - codon arithmetic (eval/stop_codon_identity.py): only TTA->TGA fits, so the stop is TGA/UGA, the class ataluren reads through most efficiently | Added as candidate 2.1, ordered FIRST (tightest genotype link) |
+| Prior-art claim factually wrong | Yes - Gonzalez-Blanco et al. 2026 Nat Commun (s41467-026-70521-0) is an explicitly MVA-framed intervention paper; mitochondrial rescue recovers brain size | Corrected openly; added as candidate 2.3 AND as convergent support for the NAD+ candidate (NAD+ improves mitochondrial function) |
+| Missing Baker 2013 (BubR1 overexpression protects against aneuploidy/cancer incl. oncogenic Ras, extends lifespan) | Yes - Nat Cell Biol 15:96 | Added; it answers the cancer-risk-direction worry the draft raised against itself |
+| No actionable output for the child | Yes - Wilms surveillance by renal US every 3-4 months to age 5 for confirmed MVA/BUB1B (Orphanet, UK recommendations) | Added as section 3.1, framed as existing published guidance for the clinical team, explicitly not my recommendation |
+| OMIM 602860 is the gene, not the MVA1 phenotype | Yes - 257300 = MVA1 | Both cited correctly |
+| Experimental ladder ordered wrongly | n/a (structural) | Gating question promoted to step 1 |
+| Phase "unproven" too vague | Yes - variants are 10,911 bp apart, beyond read-backed phasing | Now stated as unrecoverable-from-this-data, with the distance |
+| AD values missing; NMD not analysed | n/a | AD added to the genotype table; NMD predicted from position with the caveat that it is predicted, not measured |
+| Mosaicism method crude vs MoChA; over-broad negative claim; tissue caveat | Partially (MoChA reputation not independently verified) | Claim narrowed to what the data support; MoChA named as the planned stronger test; PHA-culture tissue caveat added |
+| Tone: 5 quotes reading as callous/clinical; 5 instances of self-praising honesty | n/a (judgement) | All rewritten or cut; plain-language family summary added as section 7 |
+
+**Not actioned yet** (deferred, deadline is 24/10): AlphaMissense/ddG/structural analysis of N1002K; figures (domain schematic, depth/BAF plot, structure render); second worked example for the scalability claim; systematic candidate generation across Open Targets/DGIdb/ChEMBL; quantified survey of published BUB1B-MVA genotype architectures; MoChA run.
+
+**Rigour-lens review still running** at time of writing; its findings are to be triaged the same way.
+
 ## Next passes
 
 1. Draft the Track 2 report to the rubric (structure already in `track2/report/`); weave in domain-map genotype specificity, both trials, prior-art framing, mosaicism negative.
