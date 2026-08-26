@@ -47,6 +47,19 @@ Two mechanisms are therefore available to p.Asn1002Lys:
 
 Mechanism (i) is directly addressed by abundance-raising strategies. Mechanism (ii) is much less likely to benefit from them, though a partial rather than absolute scaffolding defect could still be partly offset by mass action, and the regions N-terminal to the substitution that mediate the kinase-independent stoichiometric Cdc20 inhibition remain structurally intact on this allele. Distinguishing (i) from (ii) is the single most informative experiment in this report, and it is a protein-level measurement.
 
+**Computational evidence that p.Asn1002Lys is damaging** (`eval/n1002k_predictors.json`, dbNSFP via MyVariant.info, hg38). The residue is highly conserved (phyloP 100-way 4.87; GERP++ RS 4.84). Predictors split 8 to 4 toward damaging:
+
+| Verdict | Predictors |
+| --- | --- |
+| Damaging / pathogenic | **AlphaMissense: pathogenic (0.92, rankscore 0.84)**; ESM1b deleterious (-11.5); SIFT and SIFT4G 0.0; PolyPhen-2 HDIV 1.00 / HVAR 0.997; ClinPred 0.99; VEST4 0.89; CADD phred 24.5 |
+| Tolerated / borderline | MetaSVM (T); PrimateAI (T); BayesDel (T); REVEL 0.472, just below the usual 0.5 threshold |
+
+The disagreement is real and is reported rather than filtered: the ensemble methods that incorporate allele frequency are the ones calling tolerated, which is expected behaviour for an ultra-rare variant with no population signal to learn from, while the structure- and language-model-based predictors (AlphaMissense, ESM1b) call it pathogenic.
+
+Under ACMG criteria this variant carries PM2 (absent from gnomAD), PP3 (computational support, now well-evidenced), and PP4 (phenotype highly specific for the gene). PM3 (in trans with a pathogenic variant) is **not** available because phase is unrecoverable here, which is what keeps the variant short of a confident Likely Pathogenic call; trio sequencing establishing trans would supply it. Formal classification is a clinical laboratory's responsibility, not this report's; the criteria are named so the gap is explicit.
+
+**What this evidence does not settle.** AlphaMissense and ESM1b score functional fitness, not thermodynamic stability, so they support pathogenicity without distinguishing mechanism (i) from mechanism (ii). A ΔΔG estimate on the AlphaFold BubR1 model is the next step, and it remains the single most informative computation outstanding.
+
 **A regulatory convergence worth noting.** Lys668, the SIRT2 acetylation site that underpins candidate 2, lies immediately adjacent to the KARD phosphorylation sites Ser670 and Ser676. The NAD+/SIRT2 axis and the pseudokinase domain's allosteric function therefore act on the same short regulatory module, which raises the possibility that NAD+ repletion touches both protein stability and KARD-dependent scaffolding. This is a hypothesis suggested by the coordinates, not an established interaction, and it is testable alongside the experiments in section 2.2.
 
 ### 1.4 The two therapeutic openings this genotype creates
@@ -196,7 +209,7 @@ Steps 2-5 apply to any dosage-dependent loss-of-function disorder, a large class
 
 ## 6. Limitations
 
-- The functional consequence of p.Asn1002Lys is **inferred, not measured**; whether it destabilises the protein or impairs the pseudokinase domain's allosteric role determines whether candidate 2 is viable. No in-silico structural or stability prediction was run for this version; that is the first gap to close.
+- The functional consequence of p.Asn1002Lys is **predicted, not measured**. Computational evidence supports pathogenicity (section 1.3), but fitness-based predictors cannot distinguish destabilisation from allosteric impairment, and that distinction determines whether candidate 2 is viable. A ΔΔG estimate is the outstanding computation; a protein-level measurement in patient cells is the definitive one.
 - **Phase is unrecoverable** from the supplied data (variants 10,911 bp apart, no parental samples), so the trans configuration is an assumption inherited from phenotype and the established MVA1 architecture.
 - NMD of allele A is **predicted from position, not measured**; candidate 1 depends on it, and step 1 of its ladder addresses it directly.
 - The readthrough product's function is unknown, since near-cognate suppression substitutes residue 737 rather than restoring leucine.
