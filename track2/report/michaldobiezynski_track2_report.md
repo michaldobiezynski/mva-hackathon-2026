@@ -277,7 +277,7 @@ The generalisable pattern:
 
 Steps 2-5 apply to any dosage-dependent loss-of-function disorder, a large class. Step 6 is the one most often skipped, and it is what makes the difference between a plausible proposal and a testable one.
 
-**Limitation of this section**: the pattern is demonstrated on one case. A second worked example on a public case would be needed before calling it a validated pipeline rather than a described method.
+The pattern has been run end to end on a second, unrelated case (section 8) using the same scripts without modification. Two cases is a demonstration, not a validation; what it establishes is that the steps are executable and that they discriminate, since the second case returns materially different answers at two of them.
 
 ---
 
@@ -315,6 +315,43 @@ That second idea comes with an important warning, and it would be wrong to leave
 **None of this is a treatment, and none of it is ready to try.** These are ideas that researchers would need to test first in cells grown in a laboratory, starting with quick, inexpensive experiments designed to rule the wrong ideas out early.
 
 What happens next, realistically: these ideas go to researchers who work on this gene, and the first experiments are laboratory ones, not anything involving your child. This report also flags one thing that is already established practice rather than research: children with this genetic result are recommended to have regular kidney scans every few months in early childhood. That is worth confirming with your child's medical team, who will know whether it is already in place. The MVA Society can help with questions about the condition itself.
+
+---
+
+---
+
+## 8. Appendix: the same method applied to a second case
+
+To test whether section 5's steps are a method or a description, they were run unmodified on an unrelated disorder: cystic fibrosis, in a patient carrying the commonest compound-heterozygous genotype, F508del / G542X. The scripts are the same files, with different arguments.
+
+### Step 1, druggability (`eval/target_druggability.py ENSG00000001626`)
+
+| | *BUB1B* (this child) | *CFTR* (second case) |
+| --- | --- | --- |
+| Drugs and clinical candidates | **0** | **13**, of which 6 approved |
+| High-quality chemical probes | 0 | 2 |
+| Tractability buckets | Druggable family, high-quality ligand | Approved drug, high-quality pocket, structure with ligand, antibody and degrader buckets |
+
+The step returns opposite answers, which is the point. For *CFTR* the method stops proposing indirect strategies and says: direct pharmacology exists, start there. Only when this step comes back empty, as it does for *BUB1B*, is an abundance- or lesion-class-based search warranted.
+
+### Step 2, classify each allele by the product it yields
+
+| Allele | Product | Intervention class | Status in practice |
+| --- | --- | --- | --- |
+| F508del | Full-length, misfolded and mistrafficked | Corrector / potentiator of the existing product | Approved (lumacaftor, tezacaftor, elexacaftor with ivacaftor) |
+| G542X | Premature stop; transcript NMD-targeted | Nonsense readthrough or NMD modulation | No approved therapy |
+
+The classification reproduces, from sequence alone, the division the CF field actually made: the modulator programmes target the full-length allele, and the nonsense allele needed a separate approach. That is a check on the method rather than a discovery, which is what a second case is for.
+
+### Steps 2-4, stop-codon identity and context (`eval/stop_codon_identity.py 1624 G T 542 Gly`)
+
+G542X arises from `c.1624G>T`. Of the four glycine codons only GGA yields a stop under that substitution, so the premature codon is unambiguously **TGA (UGA)**, the same class as this child's allele A. Reading the *CFTR* coding sequence gives the +4 base as **G**, i.e. tetranucleotide **UGA-G**, hexanucleotide GAAGGT.
+
+By the same criterion applied in section 2.2, that is an unfavourable context: A and G at +4 both make termination more efficient. G542X is the most intensively studied nonsense allele in the readthrough field, and ataluren did not succeed in its confirmatory cystic fibrosis trials. A single unfavourable context does not explain a trial outcome, and it would be wrong to claim it does. What can fairly be said is that the criterion this report applies to allele A, applied blind to a well-studied case, does not contradict what happened there.
+
+### What the second case shows, and what it does not
+
+It shows the steps execute unmodified on a different gene, disease and inheritance pattern, and that they discriminate: step 1 diverts to existing drugs, and step 2 separates two alleles of the same gene into different therapeutic classes. It does not show the method produces correct novel proposals, which one case cannot establish and two cannot either. A fair claim is that the pipeline is reusable and its outputs are checkable, not that it is validated.
 
 ---
 
