@@ -41,7 +41,10 @@ Content now: allele-resolved candidates (readthrough for the null allele, NAD+/S
 - **Second worked example** (section 8): the same scripts run unmodified on CFTR F508del/G542X. Step 1 returns 13 drugs vs BUB1B's 0, so the method correctly diverts to existing pharmacology; step 2 reproduces the modulator/readthrough split the CF field actually made; and G542X's context computes as UGA-G, also unfavourable, which does not contradict ataluren's CF trial outcome.
 - **Structural analysis** (`eval/structural_context.py`, AlphaFold AF-O60566-F1 v6): Asn1002 is buried (76th percentile, pLDDT 91.1), so Asn->Lys buries a charge - a classically destabilising change. This **leans toward mechanism (i), the one abundance-raising strategies can act on**. Stated as a burial proxy, not a ddG. Leu737 also scores buried but at lower confidence and between domains, mildly disagreeing with the sequence-based benign predictions; step 3 of candidate 1's ladder settles it.
 
-Genuinely remaining: a ddG calculation (would quantify what burial suggests); the pitch video; flipping the repo public. Note `.venv/` now exists in the repo for matplotlib (gitignored).
+- **ddG calculation done** (`REPRODUCE-DDG.md`): ThermoMPNN site-saturation scan over the extracted pseudokinase domain. **p.Asn1002Lys = +1.51 kcal/mol destabilising**, 76th percentile of 5,700 substitutions, at a site in the 81st percentile for substitution sensitivity. Sign convention validated internally (identity substitutions exactly 0.000). Magnitude is moderate, not catastrophic, which is the therapeutically relevant point: the protein still folds and is still made, so there is something for abundance-raising to act on. Three computational lines (sequence predictors, burial, ddG) now converge on mechanism (i).
+- Bonus finding: Leu737's apparent burial is an artefact of inter-domain packing (82 of 128 neighbours from outside the domain, vs 129 of 129 inside for Asn1002). That removes the structural counterweight to the readthrough product's predicted tolerance, and is why no ddG is claimed for that site.
+
+Genuinely remaining: the pitch video; flipping the repo public; the Track 1 resubmission. Note `.venv/` exists in the repo for matplotlib/torch (gitignored).
 
 ## Next actions
 

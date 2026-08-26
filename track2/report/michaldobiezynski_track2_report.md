@@ -51,7 +51,7 @@ Four mechanisms are available to p.Asn1002Lys, and they do not all point the sam
 - **(iii) Loss or gain of a local site**: UniProt annotates Thr1008 as a PLK1 phosphosite, six residues away; and Asn→Lys introduces a *new lysine* into a protein whose abundance is governed by lysine acetylation and ubiquitination (section 2.0, point 3). Either is a local regulatory change rather than a global one.
 - **(iv) Dominant-negative action**: a full-length product that still engages Cdc20 through its intact N-terminal regions could be incorporated into the mitotic checkpoint complex while failing to signal properly, poisoning the complex stoichiometrically.
 
-Mechanism (i) is directly addressed by abundance-raising strategies. Mechanism (ii) is much less likely to benefit, though a partial rather than absolute scaffolding defect could be partly offset by mass action. **Mechanism (iv) inverts the sign of candidate 2 entirely: if the mutant product is dominant-negative, raising its abundance makes this child worse.** No evidence currently distinguishes these, and that is precisely why the first experiment must be a dose-response rather than a presence/absence measurement (section 2.3).
+Mechanism (i) is directly addressed by abundance-raising strategies, and it is the one the structural and thermodynamic evidence below supports. Mechanism (ii) is much less likely to benefit, though a partial rather than absolute scaffolding defect could be partly offset by mass action. **Mechanism (iv) inverts the sign of candidate 2 entirely: if the mutant product is dominant-negative, raising its abundance makes this child worse.** The computational evidence below favours (i), but it cannot exclude (ii) to (iv) operating alongside it, and mechanism (iv) is not something any structural prediction can rule out. That is why the first experiment must be a dose-response rather than a presence/absence measurement (section 2.3).
 
 Splicing is excluded as a mechanism: `c.3006` lies in the final exon, 49 nt into it, with no downstream donor site to disrupt.
 
@@ -70,7 +70,22 @@ Under ACMG criteria this variant carries PM2 (absent from gnomAD), PP3 (computat
 
 Three honest limits on that inference. It is a burial proxy, not a ΔΔG calculation, so it indicates a direction rather than a magnitude. It does not exclude mechanisms (ii) to (iv), and a destabilised protein can also scaffold poorly. And Asn1002 lies 12.3 A from the Thr1008 phosphosite, close in sequence but not in contact, which weakens the local-site variant of mechanism (iii) without eliminating it.
 
-**What remains unsettled.** AlphaMissense and ESM1b score functional fitness rather than thermodynamic stability, and the burial analysis is a proxy. A ΔΔG calculation would quantify what the burial result only suggests, and a protein-level measurement in patient cells remains the definitive test.
+**The ΔΔG calculation, which quantifies it** (`REPRODUCE-DDG.md`; scan in `eval/ddg_ssm_kinase_domain.csv`, summarised by `eval/ddg_analysis.py`). ThermoMPNN ([Dieckhaus et al. 2024, *PNAS*](https://www.pnas.org/doi/10.1073/pnas.2314853121)) was run as a site-saturation scan over the extracted pseudokinase domain, 5,700 substitutions in total:
+
+| Quantity | Value |
+| --- | --- |
+| **p.Asn1002Lys ΔΔG** | **+1.51 kcal/mol, destabilising** |
+| Rank among all 5,700 domain substitutions | 76th percentile |
+| Mean ΔΔG at residue 1002 across all substitutions | +1.55, the 81st percentile of the domain's 285 sites |
+| Domain-wide mean | +0.83 |
+
+The sign convention is established from the data rather than assumed: identity substitutions score exactly +0.000, and X→Pro substitutions average +1.82 against an overall mean of +0.83, so positive values are destabilising.
+
+Two features matter more than the number itself. First, **residue 1002 is a substitution-sensitive position** (81st percentile of sites), consistent with its conservation, its burial, and the sequence predictors calling the variant pathogenic. Second, and therapeutically, **the magnitude is moderate rather than catastrophic**: +1.5 kcal/mol describes a protein that still folds and is still made, at a reduced steady-state level, rather than one that is absent or grossly misfolded. That is precisely the regime in which raising abundance is worth attempting, since a severely destabilised product would leave nothing to stabilise.
+
+Honest qualifications: p.Asn1002Lys is mid-range among possible substitutions at this site rather than the worst of them; ThermoMPNN was trained largely on small monomeric domains, so applying it to a domain excised from a large multi-domain protein is reasonable but not fully validated; and the input is a predicted structure. Full caveats in `REPRODUCE-DDG.md`.
+
+**What remains unsettled.** Every line of evidence here is computational. Convergent prediction is not measurement, and the definitive test remains an immunoblot for steady-state BubR1 in patient-derived cells, which is step 1 of candidate 2's ladder.
 
 **A regulatory convergence worth noting.** Lys668, the SIRT2 acetylation site that underpins candidate 2, lies immediately adjacent to the KARD phosphorylation sites Ser670 and Ser676. The NAD+/SIRT2 axis and the pseudokinase domain's allosteric function therefore act on the same short regulatory module, which raises the possibility that NAD+ repletion touches both protein stability and KARD-dependent scaffolding. This is a hypothesis suggested by the coordinates, not an established interaction, and it is testable alongside the experiments in section 2.3.
 
@@ -173,7 +188,9 @@ The honest position is therefore mixed rather than favourable: the codon is the 
 
 The readthrough product is therefore more likely tolerated than not at this position on sequence grounds, which is a genuine point in candidate 1's favour and partly offsets the unfavourable stop-codon context above.
 
-One caveat from the structural pass: Leu737 also scores as buried in the AlphaFold model (80th percentile). That would ordinarily argue against tolerating a bulky or charged substitution. It carries less weight here than the equivalent finding for Asn1002, because the residue's pLDDT is lower (73.6) and it lies between domains, where AlphaFold's relative domain packing is least reliable. The sequence-based evidence and the structural proxy therefore disagree mildly, and step 3 of the ladder settles it by measurement rather than by argument.
+One apparent caveat from the structural pass resolves on inspection. Leu737 also scores as buried in the AlphaFold model (80th percentile), which would ordinarily argue against tolerating a bulky or charged substitution. But **82 of its 128 neighbouring atoms come from outside the pseudokinase domain**, whereas Asn1002 draws 129 of 129 from within it. Leu737's apparent burial is therefore a property of how the model packs domains against one another, the least reliable aspect of a multi-domain AlphaFold prediction, rather than of a genuine local environment. The same measurement is why no ΔΔG is reported for this site: the calculation would be dominated by model artefact.
+
+The sequence-based benign predictions for the readthrough product consequently stand without a real structural counterweight. Step 3 of the ladder still settles it by measurement.
 
 **Candidate agents.** Ataluren (oral, extensive paediatric exposure in Duchenne muscular dystrophy); ELX-02 (investigational aminoglycoside analogue); gentamicin (approved but with real oto- and nephrotoxicity).
 
@@ -289,7 +306,7 @@ The pattern has been run end to end on a second, unrelated case (section 8) usin
 
 ## 6. Limitations
 
-- The functional consequence of p.Asn1002Lys is **predicted, not measured**. Sequence predictors support pathogenicity and a burial proxy leans toward destabilisation (section 1.3), but neither is a ΔΔG calculation and neither excludes allosteric impairment, local-site change or dominant-negative action, and that distinction determines whether candidate 2 helps, does nothing, or does harm. A ΔΔG estimate is the outstanding computation; a protein-level measurement in patient cells is the definitive one.
+- The functional consequence of p.Asn1002Lys is **predicted, not measured**. Three independent computational lines now converge on destabilisation (sequence predictors, burial, and a +1.51 kcal/mol ΔΔG), but convergent prediction is not measurement, none of it excludes allosteric impairment, local-site change or dominant-negative action operating alongside destabilisation, and that distinction determines whether candidate 2 helps, does nothing, or does harm. A ΔΔG estimate is the outstanding computation; a protein-level measurement in patient cells is the definitive one.
 - **Phase is unrecoverable** from the supplied data (variants 10,911 bp apart, no parental samples), so the trans configuration is an assumption inherited from phenotype and the established MVA1 architecture.
 - NMD of allele A is **predicted from position, not measured**; candidate 1 depends on it, and step 1 of its ladder addresses it directly.
 - The readthrough product's function is unknown, since near-cognate suppression substitutes residue 737 rather than restoring leucine.
