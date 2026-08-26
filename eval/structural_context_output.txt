@@ -1,0 +1,23 @@
+chain: 1050 residues; neighbour counts within 10 A (median 82, IQR 42-134)
+
+residue 1002 (ASN):
+  pLDDT               91.1  (high confidence)
+  neighbour count     136  (76th percentile of chain) -> buried
+    12.3 A to 1008  T1008 phospho (PLK1)
+    22.6 A to  882  active-site residue (proton acceptor)
+    34.7 A to  795  binding site
+
+residue 737 (LEU):
+  pLDDT               73.6  (high confidence)
+  neighbour count     147  (80th percentile of chain) -> buried
+    17.1 A to  795  binding site
+    22.2 A to  882  active-site residue (proton acceptor)
+    22.7 A to  780  ATP-binding region end
+
+residue 882 (ASP):
+  pLDDT               89.4  (high confidence)
+  neighbour count     190  (95th percentile of chain) -> buried
+     0.0 A to  882  active-site residue (proton acceptor)
+    13.2 A to  795  binding site
+    13.7 A to  780  ATP-binding region end
+

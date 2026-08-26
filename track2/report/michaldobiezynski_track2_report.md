@@ -66,7 +66,11 @@ The disagreement is real and is reported rather than filtered: the ensemble meth
 
 Under ACMG criteria this variant carries PM2 (absent from gnomAD), PP3 (computational support, now well-evidenced), and PP4 (phenotype highly specific for the gene). PM3 (in trans with a pathogenic variant) is **not** available because phase is unrecoverable here, which is what keeps the variant short of a confident Likely Pathogenic call; trio sequencing establishing trans would supply it. Formal classification is a clinical laboratory's responsibility, not this report's; the criteria are named so the gap is explicit.
 
-**What this evidence does not settle.** AlphaMissense and ESM1b score functional fitness, not thermodynamic stability, so they support pathogenicity without distinguishing between the four mechanisms above. A ΔΔG estimate on the AlphaFold BubR1 model is the next step, and it remains the single most informative computation outstanding.
+**Structural context, which leans toward the druggable mechanism** (`eval/structural_context.py`, run against AlphaFold model AF-O60566-F1 v6; output in `eval/structural_context_output.txt`). Asn1002 sits in a confidently modelled region (pLDDT 91.1) and is **buried**: 136 heavy-atom neighbours within 10 A, the 76th percentile for this chain. Burying a charge is a classically destabilising substitution, and Asn→Lys does exactly that, introducing a longer, positively charged side chain into a packed environment. Mechanism (i), destabilisation, is therefore the better-supported of the four, and it is the one abundance-raising strategies can act on.
+
+Three honest limits on that inference. It is a burial proxy, not a ΔΔG calculation, so it indicates a direction rather than a magnitude. It does not exclude mechanisms (ii) to (iv), and a destabilised protein can also scaffold poorly. And Asn1002 lies 12.3 A from the Thr1008 phosphosite, close in sequence but not in contact, which weakens the local-site variant of mechanism (iii) without eliminating it.
+
+**What remains unsettled.** AlphaMissense and ESM1b score functional fitness rather than thermodynamic stability, and the burial analysis is a proxy. A ΔΔG calculation would quantify what the burial result only suggests, and a protein-level measurement in patient cells remains the definitive test.
 
 **A regulatory convergence worth noting.** Lys668, the SIRT2 acetylation site that underpins candidate 2, lies immediately adjacent to the KARD phosphorylation sites Ser670 and Ser676. The NAD+/SIRT2 axis and the pseudokinase domain's allosteric function therefore act on the same short regulatory module, which raises the possibility that NAD+ repletion touches both protein stability and KARD-dependent scaffolding. This is a hypothesis suggested by the coordinates, not an established interaction, and it is testable alongside the experiments in section 2.3.
 
@@ -167,7 +171,9 @@ The honest position is therefore mixed rather than favourable: the codon is the 
 - **The residue is poorly conserved**: phyloP 100-way 0.35, against 4.87 for Asn1002 in the same protein. Conservation is a property of the position, so this applies whichever residue readthrough inserts.
 - **L737R is predicted benign** (AlphaMissense 0.07-0.08 benign; PolyPhen-2 benign; CADD 18.7; SIFT dissenting as deleterious). Trp and Cys substitutions require two nucleotide changes from the reference TTA codon and so have no dbNSFP record, and cannot be scored this way.
 
-The readthrough product is therefore more likely tolerated than not at this position, which is a genuine point in candidate 1's favour and partly offsets the unfavourable stop-codon context above. It remains prediction rather than measurement, and step 3 of the ladder tests it directly.
+The readthrough product is therefore more likely tolerated than not at this position on sequence grounds, which is a genuine point in candidate 1's favour and partly offsets the unfavourable stop-codon context above.
+
+One caveat from the structural pass: Leu737 also scores as buried in the AlphaFold model (80th percentile). That would ordinarily argue against tolerating a bulky or charged substitution. It carries less weight here than the equivalent finding for Asn1002, because the residue's pLDDT is lower (73.6) and it lies between domains, where AlphaFold's relative domain packing is least reliable. The sequence-based evidence and the structural proxy therefore disagree mildly, and step 3 of the ladder settles it by measurement rather than by argument.
 
 **Candidate agents.** Ataluren (oral, extensive paediatric exposure in Duchenne muscular dystrophy); ELX-02 (investigational aminoglycoside analogue); gentamicin (approved but with real oto- and nephrotoxicity).
 
@@ -283,7 +289,7 @@ The pattern has been run end to end on a second, unrelated case (section 8) usin
 
 ## 6. Limitations
 
-- The functional consequence of p.Asn1002Lys is **predicted, not measured**. Computational evidence supports pathogenicity (section 1.3), but fitness-based predictors cannot distinguish among destabilisation, allosteric impairment, local-site change and dominant-negative action, and that distinction determines whether candidate 2 helps, does nothing, or does harm. A ΔΔG estimate is the outstanding computation; a protein-level measurement in patient cells is the definitive one.
+- The functional consequence of p.Asn1002Lys is **predicted, not measured**. Sequence predictors support pathogenicity and a burial proxy leans toward destabilisation (section 1.3), but neither is a ΔΔG calculation and neither excludes allosteric impairment, local-site change or dominant-negative action, and that distinction determines whether candidate 2 helps, does nothing, or does harm. A ΔΔG estimate is the outstanding computation; a protein-level measurement in patient cells is the definitive one.
 - **Phase is unrecoverable** from the supplied data (variants 10,911 bp apart, no parental samples), so the trans configuration is an assumption inherited from phenotype and the established MVA1 architecture.
 - NMD of allele A is **predicted from position, not measured**; candidate 1 depends on it, and step 1 of its ladder addresses it directly.
 - The readthrough product's function is unknown, since near-cognate suppression substitutes residue 737 rather than restoring leucine.
