@@ -23,9 +23,20 @@ Draft CSV (7 rows incl. 2 secondary) scores 100/100 offline against the primary 
 
 **Leaderboard reality (26/08)**: 10+ participants already at 100/1.000, several with bub1b filenames. The automated metric is saturated; ranking among the 100s will come down to the post-close qualitative evaluation of methods/reports, secondary findings quality, and Track 2.
 
-## Track 2 status (26/08)
+## Track 2 status (26/08) - draft complete, review loop closed
 
-Full report drafted (`track2/report/michaldobiezynski_track2_report.md`, commit 73170ea) against the rubric: mechanism characterisation with domain-map genotype specificity, NAD+/SIRT2 primary + senolytics secondary + a negative recommendation (avoid Mps1/Aurora inhibitors), honest mosaicism negative, falsification ladder, limitations. Two fresh-context adversarial reviews (rigour lens + judge-panel lens) commissioned 26/08. **Not submitted - single shot, submit near deadline after review triage.**
+Report at `track2/report/michaldobiezynski_track2_report.md` (~7,000 words). **Not submitted; single shot, submit near the 24/10 deadline.**
+
+Four adversarial review rounds, all findings verified against primary sources before actioning (triage tables in `track2/notes/mechanism-review.md`):
+- Judge-panel lens: 58/100 -> 74/100 after round 1 fixes; round 2 caught four defects my own fixes introduced.
+- Science lens (clinical geneticist / cancer biologist): found the safety-critical error, three factual errors and two arguments that inverted; round 2 verified the fixes landed and caught one applied in name only plus an overclaim in my own reasoning.
+- Reviewer's closing verdict: the report is at the churn point; remaining work is presentational, not substantive.
+
+Content now: allele-resolved candidates (readthrough for the null allele, NAD+/SIRT2 stabilisation for the missense allele, mitochondrial/proteostasis, senolytics, plus a negative recommendation); a systematic Open Targets druggability search establishing that no direct pharmacology exists; AlphaMissense/predictor evidence with ACMG criteria for both residues; the UGA-A context finding; the conditional dosage-ceiling argument; a dose-response gating experiment with a stop rule for the dominant-negative case; and a plain-language family section carrying the safety caveats.
+
+**The safety finding that matters most**: this child's own tumour type (rhabdomyosarcoma) is a published NAMPT dependency where NAD+ depletion causes complete regression in orthotopic models, so the NAD+ candidate proposes the opposite of a curative intervention in their cancer. Stated as a gating question in both the expert and family sections.
+
+Remaining optional work (none of it changes a conclusion): ddG estimate for N1002K; figures (domain schematic, depth/BAF plot); a second worked example, made cheap by `eval/target_druggability.py` running on any Ensembl gene.
 
 ## Next actions (focus shift)
 
