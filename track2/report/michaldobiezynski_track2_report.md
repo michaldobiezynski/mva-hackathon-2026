@@ -60,7 +60,7 @@ Under ACMG criteria this variant carries PM2 (absent from gnomAD), PP3 (computat
 
 **What this evidence does not settle.** AlphaMissense and ESM1b score functional fitness, not thermodynamic stability, so they support pathogenicity without distinguishing mechanism (i) from mechanism (ii). A ΔΔG estimate on the AlphaFold BubR1 model is the next step, and it remains the single most informative computation outstanding.
 
-**A regulatory convergence worth noting.** Lys668, the SIRT2 acetylation site that underpins candidate 2, lies immediately adjacent to the KARD phosphorylation sites Ser670 and Ser676. The NAD+/SIRT2 axis and the pseudokinase domain's allosteric function therefore act on the same short regulatory module, which raises the possibility that NAD+ repletion touches both protein stability and KARD-dependent scaffolding. This is a hypothesis suggested by the coordinates, not an established interaction, and it is testable alongside the experiments in section 2.2.
+**A regulatory convergence worth noting.** Lys668, the SIRT2 acetylation site that underpins candidate 2, lies immediately adjacent to the KARD phosphorylation sites Ser670 and Ser676. The NAD+/SIRT2 axis and the pseudokinase domain's allosteric function therefore act on the same short regulatory module, which raises the possibility that NAD+ repletion touches both protein stability and KARD-dependent scaffolding. This is a hypothesis suggested by the coordinates, not an established interaction, and it is testable alongside the experiments in section 2.3.
 
 ### 1.4 The two therapeutic openings this genotype creates
 
@@ -68,8 +68,8 @@ Each allele fails differently, and each failure mode has its own class of interv
 
 | Allele | Failure mode | Intervention class it exposes |
 | --- | --- | --- |
-| A: p.Leu737Ter | Premature stop codon; transcript likely degraded | **Nonsense readthrough** (section 2.1) |
-| B: p.Asn1002Lys | Full-length protein, possibly destabilised | **Abundance/stability raising** (section 2.2) |
+| A: p.Leu737Ter | Premature stop codon; transcript likely degraded | **Nonsense readthrough** (section 2.2) |
+| B: p.Asn1002Lys | Full-length protein, possibly destabilised | **Abundance/stability raising** (section 2.3) |
 
 A child with two truncating alleles would need readthrough or gene replacement rather than stabilisation; a child with two missense alleles would have no readthrough target. Classifying each allele by the *product it yields* is what generates the candidate list, and it is the transferable idea in this report.
 
@@ -97,7 +97,26 @@ Mosaic fraction is the natural biomarker for whether any intervention in section
 
 ## 2. Repurposing candidates
 
-### 2.0 Candidate decision table
+### 2.0 How this candidate list was generated
+
+The first question in any repurposing exercise is whether the target can simply be drugged directly. A systematic query of Open Targets for *BUB1B* (`eval/target_druggability.py`, output in `eval/opentargets_bub1b.json`) answers it:
+
+| Query | Result |
+| --- | --- |
+| Drugs and clinical candidates against BUB1B | **0** |
+| High-quality chemical probes | **0** |
+| Small-molecule tractability buckets met | "High-Quality Ligand", "Druggable Family" |
+| Protein-degrader tractability buckets met | "Literature", "UniProt Ubiquitination", "Database Ubiquitination" |
+
+Three things follow, and they determine the entire structure of this section.
+
+1. **No direct pharmacology exists.** Not one drug or clinical candidate targets BubR1, and there is not even a high-quality chemical probe. A candidate list for this child therefore cannot be built from direct inhibition or activation; it has to come from the lesion classes each allele creates (section 1.4) and from downstream pathway rescue.
+2. **The protein is not intrinsically undruggable.** It sits in a druggable family with high-quality ligands recorded, so the absence of drugs reflects a lack of therapeutic motive rather than a closed door. That is a meaningful distinction for a rare disease, where motive is exactly what has been missing.
+3. **The degrader-tractability evidence points the wrong way, and is useful anyway.** BubR1 qualifies on protein-degrader buckets because it is well documented as ubiquitinated. Degradation lowers protein, which is the opposite of what this child needs, but the same evidence independently confirms that **BubR1 abundance is controlled by ubiquitin-mediated degradation**, which is precisely the axis that acetylation at Lys668 and SIRT2 deacetylation regulate. A druggability database built for a different purpose corroborates the mechanism underlying candidate 2.
+
+The candidates below are therefore indirect by necessity, not by preference, and the search that establishes this is reproducible with one command.
+
+### 2.1 Candidate decision table
 
 | # | Candidate | Target allele / mechanism | Evidence tier | Regulatory tractability | Paediatric safety | Predicted effect on cancer risk | Cheapest falsification |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -107,7 +126,7 @@ Mosaic fraction is the natural biomarker for whether any intervention in section
 | 4 | Dasatinib + quercetin (senolytics) | Downstream senescence burden | Mouse BubR1 model; human trials in other indications | Dasatinib approved (oncology) | Serious concerns in a child with a malignancy history | Unresolved | Measure p16/SASP burden first |
 | 5 | **Avoid**: Mps1/TTK, Aurora B inhibitors | Further SAC weakening | Mechanistic | n/a | n/a | Adverse | n/a |
 
-### 2.1 Allele A: nonsense readthrough
+### 2.2 Allele A: nonsense readthrough
 
 **The specific fact.** `c.2210T>G` changes codon 737 from **TTA to TGA**: of the six leucine codons, TTA is the only one that a T>G substitution at codon position 2 converts into a stop, so the identity of the premature stop codon is determined unambiguously by the variant itself (`eval/stop_codon_identity.py`). The premature stop is therefore **TGA (UGA in mRNA)**.
 
@@ -125,7 +144,7 @@ Mosaic fraction is the natural biomarker for whether any intervention in section
 3. **Does the readthrough product, carrying Trp/Cys/Arg at position 737, retain checkpoint function?** A substituted full-length protein that cannot work is not a therapeutic gain.
 4. Does any functional increase reduce missegregation or aneuploidy fraction?
 
-### 2.2 Allele B: NAD+ repletion to stabilise the full-length product
+### 2.3 Allele B: NAD+ repletion to stabilise the full-length product
 
 **Mechanism link.** BubR1 abundance is regulated by acetylation at Lys668: CBP-mediated acetylation primes degradation, and the NAD+-dependent deacetylase SIRT2 opposes it. Overexpressing SIRT2 or treating mice with the NAD+ precursor NMN **increases BubR1 abundance in vivo**, and SIRT2 overexpression extends median lifespan in BubR1-hypomorphic mice ([North et al. 2014, *EMBO J* 33:1438](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4194088/)).
 
@@ -143,15 +162,15 @@ Mosaic fraction is the natural biomarker for whether any intervention in section
 3. Does any increase reduce missegregation rates or aneuploidy fraction?
 4. Only then: paediatric dosing and safety, with cancer-risk direction informed by Baker 2013.
 
-### 2.3 Mitochondrial and proteostasis support
+### 2.4 Mitochondrial and proteostasis support
 
 The MVA-specific *Drosophila* work rescued the phenotype through autophagy activation, ROS scavenging, and restoration of mitochondrial proteostasis. Those interventions were genetic, so their pharmacological translation is unclaimed ground: rapamycin for the TOR axis, N-acetylcysteine or mitochondria-targeted antioxidants for the ROS axis. This is the least mature candidate class here. It is included because it rests on the only intervention evidence generated in an explicitly MVA-framed model, and because it converges with candidate 2. On cancer-risk direction, mTOR inhibition is already used therapeutically in oncology, so rapamycin's direction is plausibly favourable; the antioxidant arm is unresolved and would need its own assessment, since antioxidants have shown context-dependent effects on tumour progression.
 
-### 2.4 Senolytics for the downstream senescence burden
+### 2.5 Senolytics for the downstream senescence burden
 
 The senescent-cell clearance experiments that founded the senolytics field were performed in BubR1-hypomorphic mice, so dasatinib plus quercetin is an obvious candidate for a BUB1B disorder, and obviousness is not an argument against correctness. It remains secondary because it targets a downstream consequence rather than the checkpoint defect; because the mouse evidence concerns ageing phenotypes rather than the malignancy risk and growth failure that dominate this child's presentation; and because dasatinib in a child with a malignancy history raises safety questions beyond what this analysis can weigh. Cancer-risk direction is unresolved. The defensible near-term step is measuring senescent-cell burden (p16 expression, SASP markers) in patient-derived cells to establish whether the burden this proposal targets is elevated at all.
 
-### 2.5 A negative recommendation: avoid further checkpoint weakening
+### 2.6 A negative recommendation: avoid further checkpoint weakening
 
 Mps1/TTK and Aurora B inhibitors are in oncology development precisely because they abrogate the spindle assembly checkpoint. In a patient whose checkpoint is already below threshold, they are mechanistically contraindicated outside a deliberately tumour-directed context under specialist oversight.
 
