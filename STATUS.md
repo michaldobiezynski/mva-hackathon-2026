@@ -1,6 +1,6 @@
 # Status - MVA Hackathon 2026
 
-**Phase: setup.** Submissions close 24/10/2026 23:59 UTC. Data deletion deadline 23/11/2026.
+**Phase: Track 1 scored at maximum; Track 2 drafted and reviewed, awaiting submission.** Submissions close 24/10/2026 23:59 UTC. Data deletion deadline 23/11/2026.
 
 ## Headline finding (26/08, first triage pass)
 
@@ -38,18 +38,20 @@ Content now: allele-resolved candidates (readthrough for the null allele, NAD+/S
 
 Remaining optional work (none of it changes a conclusion): ddG estimate for N1002K; figures (domain schematic, depth/BAF plot); a second worked example, made cheap by `eval/target_druggability.py` running on any Ensembl gene.
 
-## Next actions (focus shift)
+## Next actions
 
-1. **Track 2 is now the competition**: drug repurposing report built on the confirmed BUB1B/BubR1 spindle-assembly-checkpoint mechanism. Panel-judged (rigor 35/impact 25/innovation 25/scalability 15), single submission, due 24/10. Start the mechanism literature review.
-2. Track 1 report polish before close: the uploaded report is judged qualitatively; can resubmit an improved CSV+report (only best score counts, we are at max, so resubmission is safe for report upgrades).
-3. Repo must flip PUBLIC before close (currently private to protect nothing anymore - the answer is common knowledge on the leaderboard - but keep private until the README/repo is presentable).
-4. Optional rigour for the report: SpliceAI on intronic fallbacks, local VEP genome-wide novel-variant pass, FASTQ-based mosaicism check (aneuploidy fractions from read depth per chromosome would be a distinctive, on-theme analysis for MVA).
+Nothing is time-critical before October. In priority order when work resumes:
+
+1. **Resubmit Track 1** with the improved report (now carrying the mosaicism analysis). Safe: only the best score counts and we hold the maximum, so a resubmission cannot lose ground. Uses one of the 5 remaining slots.
+2. **Submit Track 2** near the deadline (single shot, no resubmission). Requires: the 3-minute pitch video (`video/SCRIPT.md`) and a final read-through.
+3. **Flip the repo PUBLIC** before close - it is a required deliverable for both tracks. Currently private on purpose while the leaderboard is live; `scripts/selfcheck.py --strict` passes clean, so it is presentable whenever wanted.
+4. Optional, none of it conclusion-changing: ddG estimate for N1002K; figures; a second worked example for the scalability claim.
 
 Dataset access: **ACCEPTED** (confirmed 26/08 in HF settings/gated-repos; account already held access, no new form needed). **Full corpus downloaded** to `~/mva-data/` on 26/08 (~79 GiB: 8 WGS FASTQ lane pairs + `WGS_EX2312012_HGWCNDSX7.vcf.gz` + .tbi + phenotype docx + README; verified against the repo tree, download exit 0). The FASTQs are the deletion-obligation bulk; the analysis starts from the VCF.
 
 ## Submission budget
 
-Track 1: **6/6 remaining**. Track 2: **1/1 remaining**. Ledger: `command-centre/SUBMISSION-LEDGER.md`.
+Track 1: **5/6 remaining** (slot 1 spent 26/08, scored 100/100 - the maximum, so the remaining slots cannot improve the automated score and exist only for report upgrades). Track 2: **1/1 remaining, unspent**. Ledger: `command-centre/SUBMISSION-LEDGER.md`.
 
 ## Decisions log
 
@@ -64,3 +66,4 @@ Track 1: **6/6 remaining**. Track 2: **1/1 remaining**. Ledger: `command-centre/
 | --- | --- |
 | 26/08 | Kit scaffolded from challenge source; local scorer verified against the official template CSV |
 | 26/08 | Dataset access confirmed ACCEPTED; VCF working set downloaded to ~/mva-data/ (logged in DATA-GOVERNANCE.md) |
+| 26/08 | Track 1 submission 1: 100/100, F-max 1.000, full match rank 1. Track 2 drafted and taken through four adversarial review rounds |
