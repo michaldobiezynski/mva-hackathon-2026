@@ -95,3 +95,28 @@ Rigor 22->28, Impact 14->19, Innovation 13->17, Scalability 9->10. Four NEW defe
 1. Draft the Track 2 report to the rubric (structure already in `track2/report/`); weave in domain-map genotype specificity, both trials, prior-art framing, mosaicism negative.
 2. Adversarial fresh-context review of the draft; sit; submit near deadline (single shot).
 3. Before final submission: re-verify the 2023 transplant-trial direction; BubR1 KEN-box/Cdc20 region citation; polish Track 1 report with the mosaicism scan and resubmit (safe - best score counts).
+
+
+## Adversarial review round 3 (26/08): independent science lens (clinical geneticist / cancer biologist)
+
+The first rigour agent stalled (idle twice, no report, 7 runaway subagents); stopped and respawned with a tightened brief (no subagents, bounded lookups, report-as-message). The replacement delivered the most consequential review of the three. Every checkable finding was verified by me before actioning.
+
+| Finding | Severity | Verified? | Action (commit d4e3191) |
+| --- | --- | --- | --- |
+| **This child's own tumour type is a published NAMPT dependency**: NAD+ depletion causes complete tumour regression in orthotopic rhabdomyosarcoma xenografts (McKay-Corkum, Clin Cancer Res 2023;29:4479) | CRITICAL safety | Yes | Replaced the generic "cancer cells upregulate NAMPT" caveat with the RMS-specific finding. My primary candidate proposes the opposite intervention to one that is curative in this child's tumour type in vivo |
+| Safety caveat never propagated to the FAMILY SUMMARY, which still said mice showed protection against cancer | CRITICAL | n/a | Added a plain-language paragraph stating the NAD+/cancer tension explicitly, and that the question must be settled by researchers and the child's cancer doctors BEFORE the idea is considered |
+| **Citation misattributed**: PMID 18932004 is Bohers et al., not Suijkerbuijk - the paper the entire dosage argument rests on, cited as "the Suijkerbuijk threshold" | CRITICAL | Yes, via PubMed | Reattributed; also added the two qualifications the reviewer raised (no data point between 14% and 58%, so "below 50%" is interpolation; PCS present even at 77% residual) |
+| **Nicotinamide is a sirtuin INHIBITOR** (base exchange; Sauve & Schramm 2003) - my lead agent opposes its own proposed SIRT2 mechanism | MAJOR | Yes | Agents reordered by mechanism (NMN > NR > nicotinamide); the inversion stated; a head-to-head immunoblot added as a discriminating test |
+| **UGA-A context**: c.2212 is A; A at +4 makes termination MORE efficient, so the flagship "most readthrough-amenable" claim was built on half the determinant and the missing half argues against it | MAJOR | Yes - pulled the CDS from ENST00000287598 myself | Corrected to a mixed verdict; novelty claim 2 restated as "stop codon AND 3' context"; step 2 of the ladder is now the decisive experiment |
+| **50% ceiling arithmetic**: an obligate carrier sits at ~50% and is unaffected, so stabilising allele B alone cannot exceed carrier-equivalent level, and only with fully restored, fully functional protein - which contradicts the variant being pathogenic | MAJOR | Reasoned through and sound | Replaced the comfortable "crossing a threshold" framing with the arithmetic; conclusion: neither candidate suffices alone, only the COMBINATION is coherent, margin thin. Strengthens the allele-resolved thesis |
+| **Dominant-negative (mechanism iv) inverts candidate 2's sign** - a full-length product still binding Cdc20 could poison the checkpoint complex; raising its abundance would then harm the child | MAJOR | Reasoning sound | Added as mechanism (iv) alongside (iii) local-site loss/gain; ladder step 1 recast as a dose-response rather than presence/absence |
+| **NAD+/SASP contradiction between my own candidates 2 and 4** (Nacarelli, Nat Cell Biol 2019) | MAJOR | Yes | Stated; SASP measurement moved into candidate 2's ladder |
+| Baker 2013 overreach: wild-type BubR1 in normal mice, not a mutant product; "maximum lifespan" unverified | MAJOR | Yes | Narrowed to what the paper shows; "maximum" dropped |
+| Readthrough amino-acid citations are yeast; "predominantly" unsupported | MINOR | Yes | Corrected with organism gap flagged |
+| Residue 737 "no annotated feature" = absence of evidence | MINOR | Yes | Reworded |
+| North 2014: lifespan rescue came from the SIRT2 transgene, not NMN | MINOR | Yes | Boundary stated |
+| Splicing excluded (c.3006 in final exon, 49 nt in) | pre-empt | Yes | Stated |
+
+Verified-correct by the reviewer, not to be re-churned: NMD prediction and exon arithmetic, CDS 3153 nt, TGA derivation, N1002 inside the kinase domain, K668 adjacent to S670/S676, the pseudokinase premise, Baker's oncogenic-Ras clause, North's NMN->BubR1 result, the trial descriptions, and the Wilms surveillance interval.
+
+**Still outstanding**: SIOP-Europe citation alongside Orphanet for the surveillance claim (Orphanet is weak sourcing for a clinical claim handed to a family); ddG estimate; conservation/predictor run on L737W/C/R; figures; second worked example.
