@@ -8,7 +8,9 @@ ThermoMPNN evaluates a structure's local environment. In a 1050-residue multi-do
 
 `eval/structural_context.py --domain 766-1050` was used to check whether that risk applies here. Asn1002 has **136 of 136** heavy-atom neighbours within 10 Å coming from inside the pseudokinase domain and none from outside, so extracting the domain loses nothing and the calculation is well posed.
 
-The same check disqualifies the equivalent calculation at Leu737: of its 147 neighbours, **85 come from outside the domain and only 62 from within (42% intra-domain)**, so any ΔΔG there would be dominated by model packing rather than by the residue's real environment. That number is why this report makes no ΔΔG claim for the readthrough site.
+The same check disqualifies the equivalent calculation at Leu737, though the reason needs stating precisely. Of its 147 neighbours, 85 come from its own immediate chain (residues 727-745) and the other 62 are long-range contacts from the pseudokinase domain, a region the residue does not belong to. Its burial therefore rests entirely on inter-domain packing, and excising 766-1050 would both strip the 85 local neighbours and leave the residue outside the fragment. The calculation is ill-posed either way, which is why this report makes no ΔΔG claim for the readthrough site.
+
+Note that "intra-domain share" alone can mislead: for a residue *outside* the range, a low share is expected and it is the sequence separation of the contacts, not their domain membership, that reveals whether an environment is locally determined or packing-determined.
 
 ## Steps
 
@@ -60,3 +62,14 @@ Sign convention is confirmed at source (ThermoMPNN negates the training labels a
 - ThermoMPNN was trained largely on small monomeric domains; applying it to a domain excised from a large multi-domain protein is a reasonable but not fully validated use.
 - The input is a predicted structure, not an experimental one. Domain-internal pLDDT averages 81.9, and Asn1002 itself sits at 91.1, so the local model is confident, but it remains a model.
 - A predicted ΔΔG is not a measured one. The definitive experiment is an immunoblot for steady-state BubR1 in patient-derived cells.
+
+
+## Before submitting: check the prose against the analyses
+
+Across four adversarial review rounds, the recurring defect was never the code, the data or this document: it was report prose still quoting a number the analysis had since changed. That class of error is now checkable:
+
+```sh
+.venv/bin/python scripts/check_report_numbers.py
+```
+
+It recomputes the load-bearing figures from the committed artefacts and fails if a report does not contain them. Run it after any edit that touches a number, and treat a pass as "nothing has silently drifted" rather than as proof every claim is correctly worded.
