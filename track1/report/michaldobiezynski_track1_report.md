@@ -43,14 +43,14 @@ The two candidate alleles were characterised beyond the annotation used for rank
 
 **Allele A, `chr15:40209701 T>G`, p.Leu737Ter.** ClinVar VCV000533901, Pathogenic/Likely pathogenic for *Mosaic variegated aneuploidy syndrome 1*, multiple submitters with no conflicts; gnomAD 3.3e-5; AD 21,25 at DP 46, GQ 99. The premature stop lies 748 nt upstream of the final exon-exon junction of a 3,153-nt CDS, so nonsense-mediated decay is predicted. The stop codon's identity is determined by the substitution itself: of the six leucine codons, only TTA yields a stop under a position-2 T>G, so the premature codon is **TGA** (`eval/stop_codon_identity.py`).
 
-**Allele B, `chr15:40220612 T>G`, p.Asn1002Lys.** Absent from gnomAD; AD 15,13 at DP 28, GQ 99. Three independent computational lines converge on a damaging, destabilising effect:
+**Allele B, `chr15:40220612 T>G`, p.Asn1002Lys.** Absent from gnomAD; AD 15,13 at DP 28, GQ 99. Several computational lines agree it is damaging and probably destabilising. They are not fully independent (the burial analysis and the ΔΔG derive from the same AlphaFold model), and none of them measures protein abundance:
 
 | Evidence | Result |
 | --- | --- |
 | Sequence predictors (dbNSFP) | AlphaMissense **pathogenic (0.92)**; ESM1b deleterious; SIFT 0.00; PolyPhen-2 HDIV 1.00; ClinPred 0.99; VEST4 0.89; CADD 24.5. Dissenting: MetaSVM, PrimateAI, BayesDel, REVEL 0.47 |
 | Conservation | phyloP 100-way 4.87; GERP++ RS 4.84 |
-| Structure (AlphaFold AF-O60566-F1) | Buried, 76th percentile by neighbour count, in a confidently modelled region (pLDDT 91.1); 129 of 129 neighbours intra-domain |
-| Thermodynamics (ThermoMPNN ΔΔG) | **+1.51 kcal/mol destabilising**, 75th percentile of the domain's 5,415 substitutions, at a site in the 81st percentile for substitution sensitivity |
+| Structure (AlphaFold AF-O60566-F1) | Buried, 76th percentile by neighbour count, in a confidently modelled region (pLDDT 91.1); all 136 neighbours intra-domain |
+| Thermodynamics (ThermoMPNN ΔΔG) | **+1.51 kcal/mol, destabilising rather than neutral**, 75th percentile of the domain's 5,415 substitutions. Interpret narrowly: 84% of substitutions in this domain are predicted destabilising, and all 19 at this site are, so the scan constrains the site rather than this substitution |
 
 The dissenting predictors are the ensembles that incorporate allele frequency, which is expected behaviour for an ultra-rare variant with no population signal to learn from.
 

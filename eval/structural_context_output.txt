@@ -3,6 +3,8 @@ chain: 1050 residues; neighbour counts within 10 A (median 82, IQR 42-134)
 residue 1002 (ASN):
   pLDDT               91.1  (high confidence)
   neighbour count     136  (76th percentile of chain) -> buried
+  intra-domain (766-1050) 136  extra-domain 0  (100% intra)
+  -> environment is intra-domain: the domain can be excised without losing it
     12.3 A to 1008  T1008 phospho (PLK1)
     22.6 A to  882  active-site residue (proton acceptor)
     34.7 A to  795  binding site
@@ -10,14 +12,9 @@ residue 1002 (ASN):
 residue 737 (LEU):
   pLDDT               73.6  (high confidence)
   neighbour count     147  (80th percentile of chain) -> buried
+  intra-domain (766-1050) 62  extra-domain 85  (42% intra)
+  -> environment depends on inter-domain packing, the least reliable part of a multi-domain model: do NOT excise, and treat burial here with caution
     17.1 A to  795  binding site
     22.2 A to  882  active-site residue (proton acceptor)
     22.7 A to  780  ATP-binding region end
-
-residue 882 (ASP):
-  pLDDT               89.4  (high confidence)
-  neighbour count     190  (95th percentile of chain) -> buried
-     0.0 A to  882  active-site residue (proton acceptor)
-    13.2 A to  795  binding site
-    13.7 A to  780  ATP-binding region end
 

@@ -55,6 +55,10 @@ def main() -> int:
     ap.add_argument("pdb")
     ap.add_argument("residues", nargs="+", type=int)
     ap.add_argument("--radius", type=float, default=10.0)
+    ap.add_argument("--domain", help="residue range as START-END, e.g. 766-1050. Splits each "
+                                     "neighbour count into intra- and extra-domain, which "
+                                     "determines whether the domain can be excised for "
+                                     "downstream calculations")
     args = ap.parse_args()
 
     coords, plddt, resname = parse_pdb(args.pdb)
@@ -65,10 +69,22 @@ def main() -> int:
     all_xyz = np.array([xyz for atoms in coords.values() for _, xyz in atoms])
     refs = {r: np.array(reference_atom(a)) for r, a in coords.items()}
 
-    neighbours = {}
+    domain = None
+    if args.domain:
+        lo, hi = (int(x) for x in args.domain.split("-"))
+        domain = (lo, hi)
+        intra_xyz = np.array([xyz for r, atoms in coords.items() if lo <= r <= hi
+                              for _, xyz in atoms])
+
+    neighbours, partition = {}, {}
     for r, ref in refs.items():
         d = np.linalg.norm(all_xyz - ref, axis=1)
-        neighbours[r] = int((d < args.radius).sum()) - len(coords[r])
+        own = len(coords[r])
+        neighbours[r] = int((d < args.radius).sum()) - own
+        if domain:
+            di = np.linalg.norm(intra_xyz - ref, axis=1)
+            intra = int((di < args.radius).sum()) - (own if domain[0] <= r <= domain[1] else 0)
+            partition[r] = (intra, neighbours[r] - intra)
 
     counts = np.array(sorted(neighbours.values()))
     print(f"chain: {len(coords)} residues; neighbour counts within {args.radius:.0f} A "
@@ -84,6 +100,16 @@ def main() -> int:
         print(f"  pLDDT               {plddt[r]:.1f}  "
               f"({'high confidence' if plddt[r] >= 70 else 'LOW confidence - interpret with care'})")
         print(f"  neighbour count     {n}  ({pct:.0f}th percentile of chain) -> {burial}")
+        if domain:
+            intra, extra = partition[r]
+            share = 100 * intra / n if n else 0
+            verdict = ("environment is intra-domain: the domain can be excised without losing it"
+                       if share >= 90 else
+                       "environment depends on inter-domain packing, the least reliable part of "
+                       "a multi-domain model: do NOT excise, and treat burial here with caution")
+            print(f"  intra-domain ({domain[0]}-{domain[1]}) {intra}  extra-domain {extra}  "
+                  f"({share:.0f}% intra)")
+            print(f"  -> {verdict}")
         near = sorted(((np.linalg.norm(refs[r] - refs[l]), l, label)
                        for l, label in LANDMARKS.items() if l in refs))[:3]
         for dist, l, label in near:
