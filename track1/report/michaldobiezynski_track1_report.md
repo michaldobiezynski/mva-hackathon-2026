@@ -37,6 +37,27 @@ EPCR values encode relative confidence in the compound-het pairings of the same 
 3. Genome-wide sweep: proband VCF intersected with the full ClinVar P/LP catalogue (346,282 entries): 7 hits genome-wide, all heterozygous; BUB1B is the only phenotype-concordant hit and the only gene with a plausible biallelic configuration among rare variants. No competing explanation found.
 4. Offline scoring: the published evaluator (`evaluation.py` from the challenge Space, vendored with attribution) was run against explicit hypothesis files; this CSV scores 100/100 rank points and F-max 1.0 if hypothesis 1 is the validated answer.
 
+## Variant interpretation evidence
+
+The two candidate alleles were characterised beyond the annotation used for ranking. This evidence post-dates the ranked submission and does not change it; it is included because Track 1 is also assessed qualitatively.
+
+**Allele A, `chr15:40209701 T>G`, p.Leu737Ter.** ClinVar VCV000533901, Pathogenic/Likely pathogenic for *Mosaic variegated aneuploidy syndrome 1*, multiple submitters with no conflicts; gnomAD 3.3e-5; AD 21,25 at DP 46, GQ 99. The premature stop lies 748 nt upstream of the final exon-exon junction of a 3,153-nt CDS, so nonsense-mediated decay is predicted. The stop codon's identity is determined by the substitution itself: of the six leucine codons, only TTA yields a stop under a position-2 T>G, so the premature codon is **TGA** (`eval/stop_codon_identity.py`).
+
+**Allele B, `chr15:40220612 T>G`, p.Asn1002Lys.** Absent from gnomAD; AD 15,13 at DP 28, GQ 99. Three independent computational lines converge on a damaging, destabilising effect:
+
+| Evidence | Result |
+| --- | --- |
+| Sequence predictors (dbNSFP) | AlphaMissense **pathogenic (0.92)**; ESM1b deleterious; SIFT 0.00; PolyPhen-2 HDIV 1.00; ClinPred 0.99; VEST4 0.89; CADD 24.5. Dissenting: MetaSVM, PrimateAI, BayesDel, REVEL 0.47 |
+| Conservation | phyloP 100-way 4.87; GERP++ RS 4.84 |
+| Structure (AlphaFold AF-O60566-F1) | Buried, 76th percentile by neighbour count, in a confidently modelled region (pLDDT 91.1); 129 of 129 neighbours intra-domain |
+| Thermodynamics (ThermoMPNN ΔΔG) | **+1.51 kcal/mol destabilising**, 75th percentile of the domain's 5,415 substitutions, at a site in the 81st percentile for substitution sensitivity |
+
+The dissenting predictors are the ensembles that incorporate allele frequency, which is expected behaviour for an ultra-rare variant with no population signal to learn from.
+
+**ACMG criteria**: PM2 (absent from gnomAD), PP3 (computational support), PP4 (phenotype highly specific for the gene). **PM3 is unavailable** because phase is unrecoverable here: the variants are 10,911 bp apart, beyond read-backed phasing, and no parental samples exist. That is what keeps the variant short of a confident Likely Pathogenic call, and trio sequencing would supply it. Formal classification belongs to a clinical laboratory; the criteria are named so the gap is explicit.
+
+Methods and caveats for the structural and ΔΔG work are in `REPRODUCE-DDG.md`.
+
 ## Additional analysis: direct mosaicism assessment (honest negative)
 
 Because the condition is defined by *mosaic* aneuploidy, I tested whether the supplied bulk WGS could quantify it directly, using per-chromosome median read depth and the dispersion of heterozygous allele balance across PASS biallelic SNVs (output: `mosaicism_scan.tsv`; code in the repository).
