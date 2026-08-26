@@ -72,6 +72,24 @@ Every finding below was **independently verified before actioning** (searches/AP
 
 **Rigour-lens review still running** at time of writing; its findings are to be triaged the same way.
 
+## Adversarial review round 2 (26/08): revised draft re-scored 74/100 (from 58)
+
+Rigor 22->28, Impact 14->19, Innovation 13->17, Scalability 9->10. Four NEW defects introduced by my own round-1 fixes, all actioned in commits afd36a5 and f94151b:
+
+| New defect | Verified? | Action |
+| --- | --- | --- |
+| **Report narrated its own revision history** ("an earlier draft assumed...", "Correction to an earlier claim") to judges who never saw that draft - and section 4 IS the 25% Innovation criterion, so it opened with a confession | n/a (judgement, obviously right) | All three passages deleted; science stated in present tense; section 4 now opens with the novelty claims and cites the 2026 paper as work built upon |
+| **FACTUAL ERROR: "readthrough adds full-length wild-type protein"** | Yes - near-cognate suppression at UGA inserts Trp (~82%), Cys, Arg; product carries a substitution at residue 737 | Corrected; added ladder step "does the readthrough product retain checkpoint function?"; noted 737 lies between KARD and the kinase domain with no annotated feature |
+| Internal contradiction: "mechanism (ii) is not [druggable]" stated absolutely, then argued the N-terminal Cdc20 function is intact | n/a | Softened: a partial scaffolding defect could be partly offset by mass action |
+| Promised cancer-risk assessment for "every candidate", delivered it for one | n/a | Assessed per candidate in prose and table; rapamycin's direction added (mTOR inhibitors used in oncology); unresolved ones marked as such |
+| Unsourced "current UK recommendations" clause; mangled Orphanet URL | URL fixed and checked (HTTP 200) | Clause deleted; canonical Orphanet URL used |
+| Family summary asserted "one inherited from each parent" as fact, contradicting the report's own unrecoverable-phase statement, with reproductive-counselling implications for two real adults | n/a | Rewritten as inference; also hedged "responds best", replaced research-budget language, added condition name, next steps and MVA Society pointer |
+| Opportunity: K668 (SIRT2 site) may sit adjacent to the KARD motif | Yes, and stronger than suggested - KARD phospho-sites are S670 (CDK1) and S676 (PLK1), and the pseudokinase domain was retained BECAUSE it allosterically promotes KARD phosphorylation (Cell Reports 2020) | Added as a mechanistic convergence: the missense allele's likely defect and the NAD+ axis act on the same regulatory module |
+
+**Top deferred item then actioned immediately** (reviewer ranked it highest-value): AlphaMissense + predictor panel for N1002K via dbNSFP/MyVariant (`eval/n1002k_predictors.json`). Result: **AlphaMissense pathogenic 0.92**, ESM1b deleterious, SIFT 0.0, PolyPhen-2 1.00, ClinPred 0.99, VEST4 0.89, CADD 24.5 against MetaSVM/PrimateAI/BayesDel tolerated and REVEL 0.472 borderline; residue highly conserved (phyloP 4.87, GERP++ 4.84). The 8-4 split is reported honestly, with the observation that the AF-incorporating ensembles are the dissenters, as expected for an ultra-rare variant. ACMG criteria named (PM2, PP3, PP4; PM3 unavailable because phase is unrecoverable). Fitness-based predictors cannot separate destabilisation from allosteric impairment, so a ddG estimate remains the outstanding computation.
+
+**Still deferred**: ddG/FoldX on the AlphaFold model; systematic candidate mining (Open Targets/DGIdb/ChEMBL) - reviewer's second priority and the largest remaining structural gap; figures; second worked example. MoChA explicitly deprioritised by the reviewer on reflection (it detects clonal events; MVA is non-clonal, so it would restate the same negative).
+
 ## Next passes
 
 1. Draft the Track 2 report to the rubric (structure already in `track2/report/`); weave in domain-map genotype specificity, both trials, prior-art framing, mosaicism negative.
