@@ -17,10 +17,18 @@
 
 Draft CSV (7 rows incl. 2 secondary) scores 100/100 offline against the primary hypothesis.
 
-## Next actions
+## TRACK 1 AUTOMATED SCORE MAXED (26/08, submission 1 of 6)
 
-1. Write the methods report (`track1/report/`), then ledger entry, then **first real submission** - it validates mechanics with hours of headroom, and the budget allows 5 more.
-2. Longer-horizon rigour (before final submission): local snpEff/VEP pass for novel damaging variants genome-wide; SpliceAI on the intronic fallbacks.
+**100.0/100 rank points, F-max 1.000, full match at rank 1.** The validated answer is our primary hypothesis: BUB1B p.Leu737Ter (chr15:40209701 T>G) + p.Asn1002Lys (chr15:40220612 T>G). Ledger updated; slots 2-6 remain but cannot improve the automated score.
+
+**Leaderboard reality (26/08)**: 10+ participants already at 100/1.000, several with bub1b filenames. The automated metric is saturated; ranking among the 100s will come down to the post-close qualitative evaluation of methods/reports, secondary findings quality, and Track 2.
+
+## Next actions (focus shift)
+
+1. **Track 2 is now the competition**: drug repurposing report built on the confirmed BUB1B/BubR1 spindle-assembly-checkpoint mechanism. Panel-judged (rigor 35/impact 25/innovation 25/scalability 15), single submission, due 24/10. Start the mechanism literature review.
+2. Track 1 report polish before close: the uploaded report is judged qualitatively; can resubmit an improved CSV+report (only best score counts, we are at max, so resubmission is safe for report upgrades).
+3. Repo must flip PUBLIC before close (currently private to protect nothing anymore - the answer is common knowledge on the leaderboard - but keep private until the README/repo is presentable).
+4. Optional rigour for the report: SpliceAI on intronic fallbacks, local VEP genome-wide novel-variant pass, FASTQ-based mosaicism check (aneuploidy fractions from read depth per chromosome would be a distinctive, on-theme analysis for MVA).
 
 Dataset access: **ACCEPTED** (confirmed 26/08 in HF settings/gated-repos; account already held access, no new form needed). **Full corpus downloaded** to `~/mva-data/` on 26/08 (~79 GiB: 8 WGS FASTQ lane pairs + `WGS_EX2312012_HGWCNDSX7.vcf.gz` + .tbi + phenotype docx + README; verified against the repo tree, download exit 0). The FASTQs are the deletion-obligation bulk; the analysis starts from the VCF.
 
