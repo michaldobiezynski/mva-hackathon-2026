@@ -138,7 +138,7 @@ def figure2_mosaicism():
                  arrowprops=dict(arrowstyle="->", color=NULL_ALLELE, linewidth=0.8,
                                  connectionstyle="arc3,rad=-0.25"))
     ax1.set_yticks([0.0, 0.25, 0.5, 0.75, 1.0, 1.25])
-    ax1.set_title("No dominant clonal aneuploidy in bulk WGS: depth is flat across autosomes",
+    ax1.set_title("No dominant clonal aneuploidy in bulk WGS: depth is flat across autosomes to within 7%",
                   fontsize=11, color=INK, loc="left", pad=8)
 
     ax2.bar(x, sds, color=colours, width=0.68)
@@ -149,8 +149,8 @@ def figure2_mosaicism():
     ax2.set_xlabel("chromosome", fontsize=9)
     ax2.set_ylim(0, max(sds) * 1.45)
     ax2.text(0.4, max(sds) * 1.34,
-             "chr20-22 show wider dispersion, but chrX matches them and its 'hets' are\n"
-             "necessarily artefactual, so mapping bias is the parsimonious explanation",
+             "chr20-22 show wider dispersion, but chrX matches them, and outside the\n"
+             "pseudoautosomal regions its 'hets' must be artefactual: mapping bias",
              fontsize=7.8, color=MUTED, ha="left", va="top")
     ax2.text(0.4, sum(sds[:18]) / 18 + 0.003, "autosomal mean",
              fontsize=7, color=MUTED, ha="left", va="bottom")

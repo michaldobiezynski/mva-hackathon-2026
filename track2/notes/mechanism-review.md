@@ -120,3 +120,28 @@ The first rigour agent stalled (idle twice, no report, 7 runaway subagents); sto
 Verified-correct by the reviewer, not to be re-churned: NMD prediction and exon arithmetic, CDS 3153 nt, TGA derivation, N1002 inside the kinase domain, K668 adjacent to S670/S676, the pseudokinase premise, Baker's oncogenic-Ras clause, North's NMN->BubR1 result, the trial descriptions, and the Wilms surveillance interval.
 
 **Still outstanding**: SIOP-Europe citation alongside Orphanet for the surveillance claim (Orphanet is weak sourcing for a clinical claim handed to a family); ddG estimate; conservation/predictor run on L737W/C/R; figures; second worked example.
+
+
+## Adversarial review round 4 (26/08): scoped to the newly-added material
+
+Reviewed only the ΔΔG subsection, the structural/burial analysis, section 8 (CFTR) and the three figures. Every checkable finding independently verified by me before actioning. Commit 147126c.
+
+| Finding | Severity | Verified? | Action |
+| --- | --- | --- | --- |
+| **REPRODUCIBILITY FAILURE: the quoted burial numbers (129/129, 82/128) could not be produced by the committed `structural_context.py`, which had no domain-partitioning code at all** - they came from an ad-hoc inline script using a different reference atom, and were also mutually inconsistent with the script's own totals (136, 147) | CRITICAL | Yes - read the script, confirmed zero partitioning code | Added a `--domain START-END` flag doing the partition with the same CB reference; re-ran; regenerated the committed output. Authoritative numbers: **Asn1002 136/136 intra-domain (100%)**, **Leu737 62 intra / 85 extra (42%)**. Conclusions unchanged, numbers now reproducible from one command |
+| Section 6 still said "a ΔΔG estimate is the outstanding computation" in the same bullet that reported the ΔΔG | CRITICAL | Yes | Clause deleted |
+| **"+1.5 kcal/mol is moderate, so the protein is still made and abundance-raising is worth attempting" exceeds what the number supports**: ThermoMPNN Pearson 0.43 on S669, error comparable to the mild/severe distinction the therapeutic argument turns on; and ΔΔG is folding free energy, not abundance | MAJOR | Yes - S669 0.43 confirmed | Whole interpretation rewritten to the narrow claim ("destabilising rather than neutral, keeps mechanism (i) on the table") with four explicit limits |
+| **The same number was used to argue the variant is damaging AND mild** - unfalsifiable, since any value would have read as supporting candidate 2 | MAJOR | Reasoning sound | Removed; the dose-response now carries the therapeutic argument |
+| **Category error: ΔΔG is folding thermodynamics, but candidate 2 acts on K668 acetylation-primed REGULATED degradation**, 334 residues away and outside the domain. If the mutant is cleared by quality control instead, slowing its degradation is the scenario most likely to produce the dominant-negative outcome | MAJOR | Mechanistic distinction sound | Added as limit 4; sharpens why step 1 must be a dose-response |
+| **"A severely destabilised product would leave nothing to stabilise" is refuted by my own section 8**: F508del is a grossly destabilised product with an approved corrector regimen | MAJOR | Yes, obviously right | Clause deleted |
+| "Three independent computational lines" - burial and ΔΔG derive from the same AlphaFold model and ThermoMPNN's features are largely local packing | MAJOR | Yes | Reworded to "two partly overlapping lines"; propagated to the Track 1 report |
+| CFTR approved-drug count is 7, not 6; and two of the 13 are CFTR *inhibitors*, so the raw count overstates CF-relevant pharmacology | MAJOR | Yes - re-ran my own script | Corrected, with the directional caveat added |
+| Figure 3 caption called N1002K "mid-range" when it ranks 13th of 19 from most destabilising and sits BELOW its site mean | MAJOR | Yes | "lower half"; caption now says the panel constrains the site, not the variant |
+| chrX heterozygous calls are not "necessarily artefactual" - PAR1/PAR2 are genuinely diploid in a male | MINOR | Yes | Hedged in caption, figure source and prose |
+| "depth is flat" overstates: chr22 is 6.8% elevated, and integer median depth quantises resolution at ~2% | MINOR | Yes, from the TSV | Both disclosed in the caption and figure title |
+| Figure 1 caption: KARD "retained on both" misleads for an NMD-degraded allele; and "terminates at residue 737" is off by one | MINOR | Yes | Both reworded |
+| Sign convention justified only by heuristics | MINOR | Yes - `datasets.py:161` negates the training labels | Now cited at source alongside the empirical check |
+
+**Reviewer's answers to the two questions I set** (both accepted): "+1.5 is moderate therefore druggable" is not defensible on three counts (predictor error, ΔΔG≠abundance, wrong degradation route); and percentile-within-one-domain is closer to dressing up an ordinary number, because 84.3% of the domain's substitutions are destabilising, 110 of 285 sites have all 19 destabilising, and the reference set is unlabelled. Proper calibration would need a labelled set (ClinVar P/LP vs benign in comparable pseudokinase domains). Recorded as an option, not done.
+
+**Verified clean by the reviewer**: all sequence-level claims in the new material (UniProt residue identities, kinase domain 766-1050, CDS lengths, TTA→TGA and the UGA-A context, CFTR GGA→TGA and UGA-G, pLDDT 91.06, the 12.3 Å distance), and everything in section 8 except the drug count.
